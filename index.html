@@ -32,7 +32,7 @@
   header {
     background: var(--surface);
     border-bottom: 1px solid var(--primary-bg);
-    padding: 28px 20px;
+    padding: 24px 20px;
     text-align: center;
   }
 
@@ -58,16 +58,25 @@
     font-size: 13px;
   }
 
-  nav {
+  .toolbar {
     max-width: 760px;
     margin: 0 auto;
     padding: 16px 20px 0;
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+    align-items: center;
   }
 
-  nav a {
+  nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  nav button, .lang-switch button {
+    font: inherit;
+    cursor: pointer;
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 999px;
@@ -76,6 +85,18 @@
     font-size: 13px;
     font-weight: 600;
     background: var(--surface);
+  }
+
+  nav button.active, .lang-switch button.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
   }
 
   main {
@@ -106,7 +127,7 @@
     margin-top: 28px;
   }
 
-  section > h2:first-of-type {
+  section > .doc > h2:first-of-type {
     border-top: none;
     padding-top: 0;
     margin-top: 0;
@@ -169,9 +190,13 @@
 
   a { color: var(--primary); }
 
+  .hidden { display: none !important; }
+
   @media (max-width: 480px) {
     section { padding: 22px 18px 8px; }
     h1 { font-size: 22px; }
+    .toolbar { flex-direction: column; }
+    .lang-switch { margin-left: 0; }
   }
 </style>
 </head>
@@ -182,121 +207,332 @@
   <p>developRS</p>
 </header>
 
-<nav>
-  <a href="#privacy">Privacybeleid</a>
-  <a href="#voorwaarden">Gebruiksvoorwaarden</a>
-</nav>
+<div class="toolbar">
+  <nav>
+    <button type="button" data-doc="privacy" class="active" onclick="showDoc('privacy')">
+      <span class="lang-nl">Privacybeleid</span><span class="lang-en hidden">Privacy Policy</span>
+    </button>
+    <button type="button" data-doc="terms" onclick="showDoc('terms')">
+      <span class="lang-nl">Gebruiksvoorwaarden</span><span class="lang-en hidden">Terms of Service</span>
+    </button>
+  </nav>
+  <div class="lang-switch">
+    <button type="button" data-lang="nl" class="active" onclick="showLang('nl')">NL</button>
+    <button type="button" data-lang="en" onclick="showLang('en')">EN</button>
+  </div>
+</div>
 
 <main>
 
-  <section id="privacy">
-    <h1>Privacybeleid</h1>
-    <p class="meta">Laatst bijgewerkt: 29 augustus 2026</p>
+  <!-- PRIVACY POLICY — NL -->
+  <section id="privacy-nl" class="doc-section lang-nl">
+    <div class="doc">
+      <h1>Privacybeleid</h1>
+      <p class="meta">Laatst bijgewerkt: 29 augustus 2026</p>
 
-    <div class="disclaimer">
-      Dit is een startdocument, geen juridisch sluitende tekst. Laat dit nalezen door een jurist voordat je publiceert, zeker met het oog op GDPR-verplichtingen.
+      <h2>1. Wie zijn wij</h2>
+      <p>Shopplan is een boodschappenlijst-, recepten- en maaltijdplanningsapp. De verwerkingsverantwoordelijke voor je persoonsgegevens is:</p>
+      <div class="contact-box">
+        <p><strong>developRS — Rutger Strijbos</strong></p>
+        <p>Schaffelberg 5, 2220 Heist-op-den-Berg, België</p>
+        <p>E-mail: [contact-e-mailadres invullen]</p>
+      </div>
+
+      <h2>2. Welke gegevens we verzamelen</h2>
+      <span class="pill">Accountgegevens</span>
+      <span class="pill">Boodschappenlijst &amp; recepten</span>
+      <span class="pill">Aankoopstatus</span>
+      <span class="pill">Technische gegevens</span>
+      <ul>
+        <li><strong>Accountgegevens</strong> — een anoniem gegenereerd account-ID, en indien je ervoor kiest te koppelen: je naam en e-mailadres via Google-inloggen.</li>
+        <li><strong>Huishouden- en app-inhoud</strong> — de items op je boodschappenlijst, categorieën, recepten en maaltijdplanning die je zelf invoert.</li>
+        <li><strong>Aankoopstatus</strong> — of je huishouden een actief Shopplan Pro-abonnement heeft, verwerkt via Apple, Google en RevenueCat.</li>
+        <li><strong>Technische gegevens</strong> — apparaattype, app-versie en foutmeldingen, om de app te laten werken en problemen op te sporen.</li>
+      </ul>
+      <p>Je bent niet wettelijk verplicht om ons gegevens te verstrekken. Zonder een account (ook een anoniem account) kan de app echter niet functioneren, aangezien je boodschappenlijst en huishouden daaraan gekoppeld zijn.</p>
+
+      <h2>3. Waarom en op welke rechtsgrond we deze gegevens verwerken</h2>
+      <ul>
+        <li><strong>Uitvoering van de overeenkomst</strong> (art. 6.1.b AVG) — om de kernfunctionaliteit te leveren: je boodschappenlijst en recepten opslaan, synchroniseren tussen huishoudleden, en je Shopplan Pro-abonnement activeren.</li>
+        <li><strong>Gerechtvaardigd belang</strong> (art. 6.1.f AVG) — om de app te beveiligen, misbruik te voorkomen en technische problemen op te sporen.</li>
+        <li><strong>Toestemming</strong> (art. 6.1.a AVG) — voor het koppelen van je Google-account; je kan deze toestemming op elk moment intrekken door uit te loggen of je account te verwijderen.</li>
+      </ul>
+      <p>We nemen geen beslissingen over jou op basis van volledig geautomatiseerde verwerking (profiling) die rechtsgevolgen voor jou heeft.</p>
+
+      <h2>4. Met wie we gegevens delen</h2>
+      <p>We verkopen je gegevens nooit aan derden. We werken samen met de volgende verwerkers om de app te laten functioneren:</p>
+      <ul>
+        <li><strong>Supabase</strong> — hosting van de database en authenticatie.</li>
+        <li><strong>RevenueCat</strong> — verwerking en validatie van abonnementsstatus.</li>
+        <li><strong>Google (Google Sign-In, Google Play)</strong> — optioneel inloggen en betalingen op Android.</li>
+        <li><strong>Apple (App Store)</strong> — betalingen op iOS.</li>
+      </ul>
+
+      <h2>5. Doorgifte van gegevens buiten de EU</h2>
+      <p>Sommige van onze verwerkers (waaronder Supabase, RevenueCat, Google en Apple) kunnen gegevens verwerken op servers buiten de Europese Economische Ruimte, onder meer in de Verenigde Staten. In dat geval zorgen we ervoor dat deze doorgifte gebeurt op basis van passende waarborgen, zoals de Standard Contractual Clauses (modelcontractbepalingen) van de Europese Commissie of een gelijkwaardig, door de verwerker aangeboden mechanisme.</p>
+
+      <h2>6. Hoe lang we gegevens bewaren</h2>
+      <p>We bewaren je gegevens zolang je account actief is. Je kan je account op elk moment verwijderen via Instellingen → Account → Account verwijderen in de app, waarna je gegevens permanent worden gewist, behoudens gegevens die we wettelijk verplicht zijn langer te bewaren (bijvoorbeeld boekhoudkundige gegevens bij een aankoop).</p>
+
+      <h2>7. Jouw rechten</h2>
+      <p>Onder de AVG heb je de volgende rechten met betrekking tot je persoonsgegevens:</p>
+      <ul>
+        <li>Recht op informatie en inzage</li>
+        <li>Recht op rectificatie (verbetering van onjuiste gegevens)</li>
+        <li>Recht op gegevenswissing ("recht op vergetelheid")</li>
+        <li>Recht op beperking van de verwerking</li>
+        <li>Recht op overdraagbaarheid van gegevens</li>
+        <li>Recht van bezwaar tegen verwerking op basis van gerechtvaardigd belang</li>
+      </ul>
+      <p>Om een van deze rechten uit te oefenen, neem je contact op via het e-mailadres bovenaan dit document. We reageren binnen de wettelijke termijn van één maand.</p>
+
+      <h2>8. Klacht indienen</h2>
+      <p>Ben je niet tevreden over hoe we met je gegevens omgaan? Neem eerst contact met ons op. Je hebt daarnaast het recht om een klacht in te dienen bij de Belgische toezichthoudende autoriteit:</p>
+      <div class="contact-box">
+        <p><strong>Gegevensbeschermingsautoriteit (GBA)</strong></p>
+        <p>Drukpersstraat 35, 1000 Brussel, België</p>
+        <p><a href="https://www.gegevensbeschermingsautoriteit.be" target="_blank" rel="noopener">gegevensbeschermingsautoriteit.be</a></p>
+      </div>
+
+      <h2>9. Kinderen</h2>
+      <p>Shopplan is niet gericht op kinderen onder de 16 jaar. We verzamelen niet bewust persoonsgegevens van kinderen onder deze leeftijd.</p>
+
+      <h2>10. Beveiliging</h2>
+      <p>We nemen passende technische en organisatorische maatregelen om je gegevens te beschermen tegen verlies, misbruik of ongeoorloofde toegang, onder meer via versleutelde verbindingen en toegangscontrole op onze databases.</p>
+
+      <h2>11. Wijzigingen aan dit beleid</h2>
+      <p>We kunnen dit privacybeleid van tijd tot tijd bijwerken. Belangrijke wijzigingen communiceren we via de app of via het bovenaan vermelde e-mailadres.</p>
     </div>
-
-    <h2>Wie zijn wij</h2>
-    <p>Shopplan is een boodschappenlijst- en receptenapp, ontwikkeld door developRS.</p>
-    <div class="contact-box">
-      <p><strong>Verwerkingsverantwoordelijke</strong></p>
-      <p>developRS — Rutger Strijbos</p>
-      <p>Schaffelberg 5, 2220 Heist-op-den-Berg, België</p>
-      <p>E-mail: [contact-e-mailadres invullen]</p>
-    </div>
-
-    <h2>Welke gegevens verzamelen we</h2>
-    <span class="pill">Accountgegevens</span>
-    <span class="pill">Boodschappenlijst &amp; recepten</span>
-    <span class="pill">Aankoopstatus</span>
-    <span class="pill">Technische gegevens</span>
-    <ul>
-      <li><strong>Accountgegevens</strong> — een anoniem gegenereerd account-ID, en indien je kiest te koppelen: je naam en e-mailadres via Google-inloggen.</li>
-      <li><strong>Huishouden- en app-inhoud</strong> — de items op je boodschappenlijst, categorieën, recepten en maaltijdplanning die je zelf toevoegt.</li>
-      <li><strong>Aankoopstatus</strong> — of je huishouden een actief Shopplan Pro-abonnement heeft, verwerkt via Apple/Google en RevenueCat.</li>
-      <li><strong>Technische gegevens</strong> — apparaattype en foutmeldingen, om de app te laten werken en problemen op te sporen.</li>
-    </ul>
-
-    <h2>Waarvoor gebruiken we deze gegevens</h2>
-    <ul>
-      <li>Om de kernfunctionaliteit van de app te leveren: je boodschappenlijst en recepten opslaan en synchroniseren tussen huishoudleden.</li>
-      <li>Om je aankoopstatus te verifiëren en Shopplan Pro-functies te ontgrendelen.</li>
-      <li>Om de app te beveiligen en misbruik te voorkomen.</li>
-    </ul>
-
-    <h2>Met wie delen we gegevens</h2>
-    <p>We verkopen je gegevens nooit. We werken samen met de volgende verwerkers om de app te laten functioneren:</p>
-    <ul>
-      <li><strong>Supabase</strong> — hosting van de database en authenticatie.</li>
-      <li><strong>RevenueCat</strong> — verwerking van abonnementsstatus.</li>
-      <li><strong>Google (Google Sign-In, Google Play)</strong> — optioneel inloggen en betalingen op Android.</li>
-      <li><strong>Apple (App Store)</strong> — betalingen op iOS.</li>
-    </ul>
-
-    <h2>Hoe lang bewaren we gegevens</h2>
-    <p>We bewaren je gegevens zolang je account actief is. Je kan je account op elk moment verwijderen via Instellingen → Account → Account verwijderen, waarna je gegevens permanent worden gewist.</p>
-
-    <h2>Jouw rechten (GDPR)</h2>
-    <p>Als inwoner van de Europese Unie heb je het recht op inzage, correctie, verwijdering, en overdraagbaarheid van je gegevens. Neem contact op via bovenstaand e-mailadres om deze rechten uit te oefenen.</p>
-
-    <h2>Kinderen</h2>
-    <p>Shopplan is niet gericht op kinderen onder de 16 jaar. We verzamelen niet bewust gegevens van kinderen.</p>
-
-    <h2>Wijzigingen aan dit beleid</h2>
-    <p>We kunnen dit privacybeleid van tijd tot tijd bijwerken. Belangrijke wijzigingen communiceren we via de app.</p>
   </section>
 
-  <section id="voorwaarden">
-    <h1>Gebruiksvoorwaarden</h1>
-    <p class="meta">Laatst bijgewerkt: 29 augustus 2026</p>
+  <!-- PRIVACY POLICY — EN -->
+  <section id="privacy-en" class="doc-section lang-en hidden">
+    <div class="doc">
+      <h1>Privacy Policy</h1>
+      <p class="meta">Last updated: August 29, 2026</p>
 
-    <div class="disclaimer">
-      Dit is een startdocument, geen juridisch sluitende tekst. Laat dit nalezen door een jurist voordat je publiceert.
+      <h2>1. Who we are</h2>
+      <p>Shopplan is a shopping list, recipe, and meal planning app. The data controller for your personal data is:</p>
+      <div class="contact-box">
+        <p><strong>developRS — Rutger Strijbos</strong></p>
+        <p>Schaffelberg 5, 2220 Heist-op-den-Berg, Belgium</p>
+        <p>Email: [add contact email]</p>
+      </div>
+
+      <h2>2. What data we collect</h2>
+      <span class="pill">Account data</span>
+      <span class="pill">Shopping list &amp; recipes</span>
+      <span class="pill">Purchase status</span>
+      <span class="pill">Technical data</span>
+      <ul>
+        <li><strong>Account data</strong> — an anonymously generated account ID, and if you choose to link it: your name and email address via Google Sign-In.</li>
+        <li><strong>Household and app content</strong> — the items on your shopping list, categories, recipes, and meal plans you enter yourself.</li>
+        <li><strong>Purchase status</strong> — whether your household has an active Shopplan Pro subscription, processed via Apple, Google, and RevenueCat.</li>
+        <li><strong>Technical data</strong> — device type, app version, and error reports, to keep the app running and diagnose issues.</li>
+      </ul>
+      <p>You are not legally required to provide us with data. However, without an account (including an anonymous one) the app cannot function, since your shopping list and household are tied to it.</p>
+
+      <h2>3. Why and on what legal basis we process this data</h2>
+      <ul>
+        <li><strong>Performance of a contract</strong> (Art. 6.1.b GDPR) — to deliver core functionality: storing and syncing your shopping list and recipes across household members, and activating your Shopplan Pro subscription.</li>
+        <li><strong>Legitimate interest</strong> (Art. 6.1.f GDPR) — to secure the app, prevent abuse, and diagnose technical issues.</li>
+        <li><strong>Consent</strong> (Art. 6.1.a GDPR) — for linking your Google account; you can withdraw this consent at any time by signing out or deleting your account.</li>
+      </ul>
+      <p>We do not make decisions about you based solely on automated processing (profiling) that produces legal effects concerning you.</p>
+
+      <h2>4. Who we share data with</h2>
+      <p>We never sell your data to third parties. We work with the following processors to operate the app:</p>
+      <ul>
+        <li><strong>Supabase</strong> — database hosting and authentication.</li>
+        <li><strong>RevenueCat</strong> — subscription status processing and validation.</li>
+        <li><strong>Google (Google Sign-In, Google Play)</strong> — optional sign-in and billing on Android.</li>
+        <li><strong>Apple (App Store)</strong> — billing on iOS.</li>
+      </ul>
+
+      <h2>5. International data transfers</h2>
+      <p>Some of our processors (including Supabase, RevenueCat, Google, and Apple) may process data on servers outside the European Economic Area, including in the United States. Where this occurs, we ensure the transfer is covered by appropriate safeguards, such as the European Commission's Standard Contractual Clauses or an equivalent mechanism offered by the processor.</p>
+
+      <h2>6. How long we keep data</h2>
+      <p>We retain your data for as long as your account is active. You can delete your account at any time via Settings → Account → Delete account in the app, after which your data is permanently erased, except where we are legally required to retain certain records longer (for example, accounting records related to a purchase).</p>
+
+      <h2>7. Your rights</h2>
+      <p>Under the GDPR, you have the following rights regarding your personal data:</p>
+      <ul>
+        <li>Right to information and access</li>
+        <li>Right to rectification of inaccurate data</li>
+        <li>Right to erasure ("right to be forgotten")</li>
+        <li>Right to restrict processing</li>
+        <li>Right to data portability</li>
+        <li>Right to object to processing based on legitimate interest</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at the email address listed above. We will respond within the statutory period of one month.</p>
+
+      <h2>8. Filing a complaint</h2>
+      <p>If you are unhappy with how we handle your data, please contact us first. You also have the right to lodge a complaint with the Belgian supervisory authority:</p>
+      <div class="contact-box">
+        <p><strong>Belgian Data Protection Authority (GBA/APD)</strong></p>
+        <p>Drukpersstraat 35, 1000 Brussels, Belgium</p>
+        <p><a href="https://www.gegevensbeschermingsautoriteit.be" target="_blank" rel="noopener">gegevensbeschermingsautoriteit.be</a></p>
+      </div>
+
+      <h2>9. Children</h2>
+      <p>Shopplan is not directed at children under 16. We do not knowingly collect personal data from children under this age.</p>
+
+      <h2>10. Security</h2>
+      <p>We take appropriate technical and organizational measures to protect your data against loss, misuse, or unauthorized access, including encrypted connections and access controls on our databases.</p>
+
+      <h2>11. Changes to this policy</h2>
+      <p>We may update this privacy policy from time to time. We will communicate significant changes through the app or the email address listed above.</p>
     </div>
+  </section>
 
-    <h2>Aanvaarding van de voorwaarden</h2>
-    <p>Door Shopplan te gebruiken, ga je akkoord met deze gebruiksvoorwaarden. Gebruik de app niet als je niet akkoord gaat.</p>
+  <!-- TERMS OF SERVICE — NL -->
+  <section id="terms-nl" class="doc-section lang-nl hidden">
+    <div class="doc">
+      <h1>Gebruiksvoorwaarden</h1>
+      <p class="meta">Laatst bijgewerkt: 29 augustus 2026</p>
 
-    <h2>De dienst</h2>
-    <p>Shopplan is een gratis boodschappenlijst-app met een optionele betaalde upgrade (Shopplan Pro) voor recepten en maaltijdplanning. Het gratis gedeelte blijft gratis; Shopplan Pro is een jaarlijks, automatisch verlengend abonnement via de App Store of Google Play.</p>
+      <h2>1. Aanvaarding van de voorwaarden</h2>
+      <p>Door Shopplan te gebruiken, ga je akkoord met deze gebruiksvoorwaarden. Gebruik de app niet als je niet akkoord gaat met deze voorwaarden.</p>
 
-    <h2>Accounts en huishoudens</h2>
-    <ul>
-      <li>Je kan de app anoniem gebruiken, of je account koppelen aan Google voor back-up en toegang op meerdere toestellen.</li>
-      <li>Je bent verantwoordelijk voor de inhoud die je aan je huishouden toevoegt en voor wie je uitnodigt.</li>
-      <li>Een Shopplan Pro-abonnement geldt voor het volledige huishouden waaraan het is gekoppeld.</li>
-    </ul>
+      <h2>2. De dienst</h2>
+      <p>Shopplan is een gratis boodschappenlijst-app met een optionele betaalde upgrade (Shopplan Pro) voor recepten en maaltijdplanning. Het gratis gedeelte (gedeelde boodschappenlijst, categorieën, huishouden) blijft gratis; Shopplan Pro is een jaarlijks, automatisch verlengend abonnement via de App Store of Google Play.</p>
 
-    <h2>Abonnementen en betalingen</h2>
-    <ul>
-      <li>Shopplan Pro is een jaarlijks abonnement dat automatisch verlengt, tenzij je opzegt.</li>
-      <li>Betalingen verlopen via de App Store of Google Play; wij hebben geen toegang tot je betaalgegevens.</li>
-      <li>Je kan je abonnement op elk moment beheren of opzeggen via je Apple- of Google-accountinstellingen.</li>
-    </ul>
+      <h2>3. Accounts en huishoudens</h2>
+      <ul>
+        <li>Je kan de app anoniem gebruiken, of je account koppelen aan Google voor back-up en toegang op meerdere toestellen.</li>
+        <li>Je bent verantwoordelijk voor de inhoud die je aan je huishouden toevoegt en voor wie je uitnodigt.</li>
+        <li>Een Shopplan Pro-abonnement geldt voor het volledige huishouden waaraan het gekoppeld is.</li>
+      </ul>
 
-    <h2>Aanvaardbaar gebruik</h2>
-    <p>Je stemt ermee in de app niet te gebruiken voor illegale doeleinden, om anderen te misleiden, of om de dienst te verstoren.</p>
+      <h2>4. Abonnementen en betalingen</h2>
+      <ul>
+        <li>Shopplan Pro is een jaarlijks abonnement dat automatisch verlengt, tenzij je tijdig opzegt.</li>
+        <li>Betalingen verlopen via de App Store of Google Play; wij hebben geen toegang tot je betaalgegevens.</li>
+        <li>Je kan je abonnement op elk moment beheren of opzeggen via je Apple- of Google-accountinstellingen.</li>
+      </ul>
 
-    <h2>Aansprakelijkheid</h2>
-    <p>Shopplan wordt geleverd "zoals het is". We streven naar een betrouwbare dienst, maar kunnen niet garanderen dat de app altijd foutloos of ononderbroken beschikbaar is.</p>
+      <h2>5. Aanvaardbaar gebruik</h2>
+      <p>Je stemt ermee in de app niet te gebruiken voor illegale doeleinden, om anderen te misleiden of schade te berokkenen, of om de dienst te verstoren of te reverse-engineeren.</p>
 
-    <h2>Wijzigingen</h2>
-    <p>We kunnen deze voorwaarden bijwerken. Voortgezet gebruik van de app na een wijziging geldt als aanvaarding van de nieuwe voorwaarden.</p>
+      <h2>6. Intellectuele eigendom</h2>
+      <p>De app, inclusief het ontwerp, de broncode en de merknaam Shopplan, is eigendom van developRS. Je krijgt een beperkt, herroepbaar recht om de app te gebruiken voor persoonlijk, niet-commercieel gebruik.</p>
 
-    <h2>Contact</h2>
-    <div class="contact-box">
-      <p>developRS — Rutger Strijbos</p>
-      <p>Schaffelberg 5, 2220 Heist-op-den-Berg, België</p>
-      <p>E-mail: [contact-e-mailadres invullen]</p>
+      <h2>7. Aansprakelijkheid</h2>
+      <p>Shopplan wordt geleverd "zoals het is", zonder garanties. We streven naar een betrouwbare dienst, maar kunnen niet garanderen dat de app altijd foutloos of ononderbroken beschikbaar is. Voor zover wettelijk toegestaan, is developRS niet aansprakelijk voor indirecte schade voortvloeiend uit het gebruik van de app.</p>
+
+      <h2>8. Beëindiging</h2>
+      <p>Je kan je gebruik van de app op elk moment stopzetten door je account te verwijderen. We kunnen toegang tot de app opschorten of beëindigen bij een schending van deze voorwaarden.</p>
+
+      <h2>9. Toepasselijk recht</h2>
+      <p>Op deze voorwaarden is Belgisch recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechtbanken van het arrondissement waar developRS gevestigd is.</p>
+
+      <h2>10. Wijzigingen</h2>
+      <p>We kunnen deze voorwaarden bijwerken. Voortgezet gebruik van de app na een wijziging geldt als aanvaarding van de nieuwe voorwaarden.</p>
+
+      <h2>11. Contact</h2>
+      <div class="contact-box">
+        <p>developRS — Rutger Strijbos</p>
+        <p>Schaffelberg 5, 2220 Heist-op-den-Berg, België</p>
+        <p>E-mail: [contact-e-mailadres invullen]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMS OF SERVICE — EN -->
+  <section id="terms-en" class="doc-section lang-en hidden">
+    <div class="doc">
+      <h1>Terms of Service</h1>
+      <p class="meta">Last updated: August 29, 2026</p>
+
+      <h2>1. Acceptance of terms</h2>
+      <p>By using Shopplan, you agree to these terms of service. Do not use the app if you do not agree to these terms.</p>
+
+      <h2>2. The service</h2>
+      <p>Shopplan is a free shopping list app with an optional paid upgrade (Shopplan Pro) for recipes and meal planning. The free tier (shared shopping list, categories, household) remains free; Shopplan Pro is an annual, auto-renewing subscription available through the App Store or Google Play.</p>
+
+      <h2>3. Accounts and households</h2>
+      <ul>
+        <li>You can use the app anonymously, or link your account to Google for backup and access across multiple devices.</li>
+        <li>You are responsible for the content you add to your household and for who you invite.</li>
+        <li>A Shopplan Pro subscription applies to the entire household it is linked to.</li>
+      </ul>
+
+      <h2>4. Subscriptions and payments</h2>
+      <ul>
+        <li>Shopplan Pro is an annual subscription that renews automatically unless cancelled in time.</li>
+        <li>Payments are processed through the App Store or Google Play; we do not have access to your payment details.</li>
+        <li>You can manage or cancel your subscription at any time through your Apple or Google account settings.</li>
+      </ul>
+
+      <h2>5. Acceptable use</h2>
+      <p>You agree not to use the app for illegal purposes, to mislead or harm others, or to disrupt or reverse-engineer the service.</p>
+
+      <h2>6. Intellectual property</h2>
+      <p>The app, including its design, source code, and the Shopplan brand name, is owned by developRS. You are granted a limited, revocable right to use the app for personal, non-commercial purposes.</p>
+
+      <h2>7. Liability</h2>
+      <p>Shopplan is provided "as is," without warranties. We strive to provide a reliable service but cannot guarantee the app will always be error-free or available without interruption. To the extent permitted by law, developRS is not liable for indirect damages arising from use of the app.</p>
+
+      <h2>8. Termination</h2>
+      <p>You may stop using the app at any time by deleting your account. We may suspend or terminate access to the app in case of a breach of these terms.</p>
+
+      <h2>9. Governing law</h2>
+      <p>These terms are governed by Belgian law. Disputes will be submitted to the competent courts of the district where developRS is established.</p>
+
+      <h2>10. Changes</h2>
+      <p>We may update these terms. Continued use of the app after a change constitutes acceptance of the new terms.</p>
+
+      <h2>11. Contact</h2>
+      <div class="contact-box">
+        <p>developRS — Rutger Strijbos</p>
+        <p>Schaffelberg 5, 2220 Heist-op-den-Berg, Belgium</p>
+        <p>Email: [add contact email]</p>
+      </div>
     </div>
   </section>
 
 </main>
 
 <footer>
-  © 2026 developRS. Alle rechten voorbehouden.
+  © 2026 developRS. <span class="lang-nl">Alle rechten voorbehouden.</span><span class="lang-en hidden">All rights reserved.</span>
 </footer>
+
+<script>
+  let currentDoc = 'privacy';
+  let currentLang = 'nl';
+
+  function showDoc(doc) {
+    currentDoc = doc;
+    document.querySelectorAll('nav button').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.doc === doc);
+    });
+    render();
+  }
+
+  function showLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang;
+    render();
+  }
+
+  function render() {
+    document.querySelectorAll('.doc-section').forEach(function (section) {
+      const isCorrectDoc = section.id.startsWith(currentDoc);
+      const isCorrectLang = section.classList.contains('lang-' + currentLang);
+      section.classList.toggle('hidden', !(isCorrectDoc && isCorrectLang));
+    });
+    document.querySelectorAll('header .lang-nl, header .lang-en, footer .lang-nl, footer .lang-en, nav .lang-nl, nav .lang-en').forEach(function (el) {
+      const isCorrectLang = el.classList.contains('lang-' + currentLang);
+      el.classList.toggle('hidden', !isCorrectLang);
+    });
+  }
+
+  render();
+</script>
 
 </body>
 </html>
