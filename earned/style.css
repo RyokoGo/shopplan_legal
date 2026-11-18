@@ -1,0 +1,66 @@
+/* Shared look for the Earned. web pages: the app's dark terminal style,
+   with a light version for readers who prefer it. */
+:root {
+  --bg: #0b0d10;
+  --panel: #13161b;
+  --line: #262b33;
+  --text: #e8e6e1;
+  --muted: #a3a7ae;
+  --gold: #e3b75a;
+  --todo-bg: rgba(255, 107, 107, 0.16);
+  --todo-text: #ff8a8a;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fbfaf7;
+    --panel: #ffffff;
+    --line: #e4e1da;
+    --text: #1b1d21;
+    --muted: #5d626b;
+    --gold: #9a6d12;
+    --todo-bg: rgba(220, 38, 38, 0.1);
+    --todo-text: #b91c1c;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+}
+main { max-width: 720px; margin: 0 auto; padding: 32px 16px 48px; }
+header { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 24px; }
+.brand {
+  margin: 0;
+  font: 700 22px/1 "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+h1 { font-size: 30px; line-height: 1.2; margin: 12px 0 4px; }
+h2 { font-size: 20px; margin: 36px 0 8px; }
+h3 { font-size: 16px; margin: 22px 0 4px; }
+.meta { color: var(--muted); margin: 0; font-size: 14px; }
+.lead { font-size: 18px; }
+a { color: var(--gold); }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+section { scroll-margin-top: 16px; }
+ul, ol { padding-left: 22px; }
+li { margin: 4px 0; }
+.toc {
+  display: flex; flex-wrap: wrap; gap: 6px 14px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  padding: 12px 14px; font-size: 14px;
+}
+table { width: 100%; border-collapse: collapse; font-size: 14px; display: block; overflow-x: auto; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; }
+footer { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 14px; }
+
+/* Placeholders still to fill in before publishing. Remove these classes
+   (and the .todo-block notes) once the text is final. */
+.todo { background: var(--todo-bg); color: var(--todo-text); border-radius: 3px; padding: 0 3px; }
+.todo-block { background: var(--todo-bg); color: var(--todo-text); border-radius: 6px; padding: 8px 10px; font-size: 14px; }
+.todo-item { border-left: 3px solid var(--todo-text); padding-left: 8px; }
+.todo-link { background: var(--todo-bg); color: var(--todo-text); border-radius: 3px; padding: 0 3px; }
